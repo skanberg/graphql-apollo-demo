@@ -37,7 +37,7 @@ const App = () => {
     subscribeToMore({
       document: MESSAGES_SUBSCRIPTION,
       updateQuery: (prev, { subscriptionData }) => {
-        if (!subscriptionData.data) return prev;
+        if (!subscriptionData.data || name === null) return prev;
         if (subscriptionData.data.messageAdded.name === name) return prev;
         return {
           messages: [subscriptionData.data.messageAdded, ...prev.messages]
